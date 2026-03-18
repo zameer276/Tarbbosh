@@ -44,25 +44,6 @@ const Navbar = () => {
     { name: 'Contact', href: '#contact' },
   ];
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith('#')) {
-      e.preventDefault();
-      const id = href.substring(1);
-      const element = document.getElementById(id);
-      if (element) {
-        const offset = 80; // height of sticky navbar
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-        setIsOpen(false);
-      }
-    }
-  };
-
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'glass-nav py-3' : 'bg-transparent py-5'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -80,7 +61,6 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
                 className={`font-medium transition-colors hover:text-warm-orange ${scrolled ? 'text-warm-brown' : 'text-white'}`}
               >
                 {link.name}
@@ -95,7 +75,8 @@ const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`${scrolled ? 'text-warm-brown' : 'text-white'} p-2`}
+              className={`${scrolled ? 'text-warm-brown' : 'text-white'} p-2 cursor-pointer`}
+              aria-label="Toggle Menu"
             >
               {isOpen ? <X /> : <Menu />}
             </button>
@@ -117,8 +98,11 @@ const Navbar = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className="block px-3 py-3 text-base font-medium text-warm-brown hover:text-warm-orange hover:bg-soft-brown/10 rounded-md"
+                  onClick={() => {
+                    // Small delay to ensure the browser processes the anchor click
+                    setTimeout(() => setIsOpen(false), 150);
+                  }}
+                  className="block px-3 py-3 text-base font-medium text-warm-brown hover:text-warm-orange hover:bg-soft-brown/10 rounded-md transition-colors"
                 >
                   {link.name}
                 </a>
@@ -137,7 +121,7 @@ const Navbar = () => {
 };
 
 const Hero = () => (
-  <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden scroll-mt-20">
+  <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden scroll-mt-24">
     <div className="absolute inset-0 z-0">
       <motion.img
         initial={{ scale: 1.1 }}
@@ -195,7 +179,7 @@ const Hero = () => (
 );
 
 const About = () => (
-  <section id="about" className="py-24 bg-cream scroll-mt-20">
+  <section id="about" className="py-24 bg-cream scroll-mt-24">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid md:grid-cols-2 gap-16 items-center">
         <motion.div
@@ -289,7 +273,7 @@ const MenuSection = () => {
   const filteredItems = menuItems.filter(item => item.category === activeCategory);
 
   return (
-    <section id="menu" className="py-24 bg-soft-brown/10 scroll-mt-20">
+    <section id="menu" className="py-24 bg-soft-brown/10 scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal width="100%">
           <h2 className="section-title">Our Delicious Menu</h2>
@@ -369,7 +353,7 @@ const MenuSection = () => {
 };
 
 const SpecialOffers = () => (
-  <section id="offers" className="py-24 bg-cream scroll-mt-20">
+  <section id="offers" className="py-24 bg-cream scroll-mt-24">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <Reveal width="100%">
         <h2 className="section-title">Special Offers</h2>
@@ -422,7 +406,7 @@ const SpecialOffers = () => (
 );
 
 const Gallery = () => (
-  <section id="gallery" className="py-24 bg-soft-brown/5 scroll-mt-20">
+  <section id="gallery" className="py-24 bg-soft-brown/5 scroll-mt-24">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <Reveal width="100%">
         <h2 className="section-title">Our Gallery</h2>
@@ -461,7 +445,7 @@ const Gallery = () => (
 );
 
 const Contact = () => (
-  <section id="contact" className="py-24 bg-cream scroll-mt-20">
+  <section id="contact" className="py-24 bg-cream scroll-mt-24">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <Reveal width="100%">
         <h2 className="section-title">Get in Touch</h2>
