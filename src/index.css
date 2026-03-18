@@ -18,6 +18,8 @@
   }
   body {
     @apply bg-cream text-warm-brown font-sans;
+    background-image: radial-gradient(#E6D5B8 0.5px, transparent 0.5px);
+    background-size: 24px 24px;
   }
 }
 
