@@ -1,0 +1,5 @@
+{
+  "name": "Tarboosh Restaurant",
+  "description": "Authentic Kashmiri & multi-cuisine restaurant in Dhobiwan, Jammu and Kashmir. Order fresh Veg, Non-Veg, Fast Food, and Beverages via WhatsApp.",
+  "requestFramePermissions": ["geolocation"]
+}

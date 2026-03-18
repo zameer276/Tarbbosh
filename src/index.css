@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-cream: #FDFBF7;
+  --color-warm-brown: #8B4513;
+  --color-soft-brown: #E6D5B8;
+  --color-soft-green: #A3B18A;
+  --color-warm-orange: #E67E22;
+  --color-deep-orange: #D35400;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-cream text-warm-brown font-sans;
+  }
+}
+
+.glass-nav {
+  @apply bg-cream/80 backdrop-blur-md border-b border-soft-brown/20;
+}
+
+.btn-primary {
+  @apply bg-warm-orange hover:bg-deep-orange text-white px-6 py-3 rounded-full font-medium transition-all duration-300 shadow-md hover:shadow-lg flex items-center gap-2;
+}
+
+.btn-whatsapp {
+  @apply bg-[#25D366] hover:bg-[#128C7E] text-white px-6 py-3 rounded-full font-medium transition-all duration-300 shadow-md hover:shadow-lg flex items-center gap-2;
+}
+
+.section-title {
+  @apply text-3xl md:text-4xl font-bold text-center mb-12 relative;
+}
+
+.section-title::after {
+  content: '';
+  @apply absolute -bottom-3 left-1/2 -translate-x-1/2 w-20 h-1 bg-warm-orange rounded-full;
+}
